@@ -1,7 +1,31 @@
 # Coding Journal
-## Name: Dr. Brown
-## Lab: Module 1
+## Name: Chris Condreay
+## Reading / Lab: Module 1
 ## Entries:
-### November 5th, 1955
-I completed the installation of the flux capacitor in the Delorian this morning.  I'm having trouble getting enough power to charge it, so I'm not sure we'll ever be able to make it home to 1985.  
+### January 8th, 2023
+
+## 1.1 Programming
+
+### Basic Instruction Types
+- Input
+- Process
+- Output
+
+## 1.2 Programming Basics
+
+### Simple Java
+- A program starts in main(), executing the statements within main's braces {}
+
+public class Salary {
+
+  public static void main(String[] args) {
+    int wage;
+
+    wage = 20;
+
+    System.out.print("Salary is ");
+    System.out.println(wage * 40 * 52);
+  }
+}
+
 

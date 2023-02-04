@@ -161,7 +161,7 @@ Reference variables of wrapper classes can also be compared using the **equals()
 
 **Unboxing** is the automatic converesion of wrapper class objects to the corresponding primitive types
 
-###### Senario
+###### Autoboxing Senarios
 (1) Assign primitive type to wrapper class variable
 
     Double floorArea = 20.25; // Autboxing of 20.25 to a Double
@@ -182,3 +182,169 @@ Reference variables of wrapper classes can also be compared using the **equals()
 
     double newRate = 97.2;
     setRate(newRate); // Autoboxing of newRate to Double
+
+###### Unboxing Scenarios
+(1) Assign wrapper class variable to primitive type
+
+      Double num1 = 3.14;
+      Character letter1 = 'A';
+
+      double num2 = num1; // Unboxing of Double to double
+      char letter2 = letter1; // Unboxing of Character to char
+
+(2) Pass wrapper class variable to a method with primitive type parameter
+
+    public void setInitial(char letter) {
+      // ...
+    }
+
+    Character userInitial = 'Z';
+    setInitial(userInitial); // Unboxing of userInitial to a char
+
+(3) Combine wrapper class and primitive types in expression
+
+    Double currTemp = 95.2;
+    double tempDiff = 100.0 - currTemp; // Unboxing of currTemp to double
+
+    Integer numItems = 11;
+
+    if (numItems % 2 == 0) { // Unboxing of numItems to int
+      // ...
+    }
+
+#### Converting to primitive types
+
+The Integer, Double, and Long wrapper classes provide methods for converting object to primtive types
+
+***intValue()*** returns the value of the wrapper class object as a primitive int value, type casting if necessary
+
+***doubleValue ()*** returns the value of the wrapper class object as a primitive double value, type casting if necessary
+
+***longValue()*** returns the value of the wrapper class object as a primitive long value, type casting if necessary
+
+    Integer num1 = 14;
+    Double num2 = 6.7643;
+    Double num3 = 5.6e12;
+
+    num2.intValue() // Returns 6
+
+    num1.doubleValue() // Returns 14.0
+
+    num3.longValue() // Returns 5600000000000
+
+The Character and Boolean classes support the ***charValue()*** and ***booleanValue()*** methods, respectively, which perform similar functions
+
+#### Converting to and from Strings
+
+***toString()*** returns a String containing the decimal representation of the value contained by the wrapper class object
+
+    Integer num1 = 10;
+    Double num2 = 3.14;
+
+    num1.toString() // Returns "10"
+    num2.toString() // Returns "3.14"
+
+
+
+***Integer.toString***(someInteger) returns a String containing the decimal representation of the value of someInteger. someInteger may be an Integer object, a int variable, or an integer literal. This static method is also available for the other wrapper classes (e.g.,  **Double.toString(someDouble)**)
+
+
+    Integer num1 = 10;
+    int regularInt = 20;
+
+    Integer.toString(num1)       // Returns "10"
+    Integer.toString(regularInt) // Returns "20"
+    Integer.toString(3)          // Returns "3"
+
+***Integer.parseInt***(someString) parses someString and returns an int representing the value encoded by someString. This static method is also available for the other wrapper classes (e.g., **Double.parseDouble(someString)**), returning the corresponding primitive type
+
+    String str1 = "32";
+
+    Integer.parseInt(str1)    // Returns int value 32
+    Integer.parseInt("2001") // Returns int value 2001
+
+***Integer.valueOf***(someString) parses someString and returns a new Integer object with the value encoded by someString. This static method is also available for the other wrapper classes (e.g., **Double.valueOf(someString)**), returning a new object of the corresponding type
+
+    String str1 = "32";
+
+    Integer.valueOf(str1)    // Returns Integer object with value 32
+    Integer.valueOf("2001") // Returns Integer object with value 2001
+
+***Integer.toBinaryString***(someInteger) returns a String containing the binary representation of someInteger. someInteger may be an Integer object, a int variable, or an integer literal. This static method is also available for the Long classes (e.g.,  **Long.toBinaryString(someLong)**)
+
+    Integer num1 = 10;
+    int regularInt = 20;
+
+    Integer.toBinaryString(num1)       // Returns "1010"
+    Integer.toBinaryString(regularInt) // Returns "10100"
+    Integer.toBinaryString(7)          // Return "111"
+
+
+Ex: Converting a decimal number to a binary 
+
+    import java.util.Scanner;
+
+    public class DecimalToBinary {
+      public static void main(String [] args) {
+          Scanner scnr = new Scanner(System.in);
+          int decimalInput;
+          String binaryOutput;
+          
+          System.out.print("Enter a decimal number: ");
+          decimalInput = scnr.nextInt();
+          
+          binaryOutput = Integer.toBinaryString(decimalInput);
+          
+          System.out.println("The binary representation of " + decimalInput +
+                            " is " + binaryOutput);
+      }
+    }
+
+### 3.6 Using packages
+
+#### Built-in Java packages
+
+A **package** is a grouping of related types, classes, interfaces, and subpackage
+
+**Package members** are the types, classes, and interfaces in a package
+
+###### Common Java packages
+
+  - ***java.lang*** (String, Integer, Double, Math)
+    - Contains fundamental Java classes. Automatically imported by Java
+  - ***java.util*** (Collection, ArrayList, LinkedListm Scanner)	
+    - Contains the Java collections framework classes and miscellaneous utility classes
+  - ***java.io*** (File, InputStream, OutputStream)
+    - Contains classes for system input and output
+  - ***javax.swing*** (JFrame, JTextField, JButton)
+    - Contains classes for building graphical user interfaces
+
+A class' **fully qualified name** is the concatenation of the package name with the class name using a period
+
+An **import statement** imports a package member into a file to enable use of the package member directly, without having to use the package member's fully qualified name
+
+A programmer import all members of a package by using the **wildcard** character "*" instead of a package member name
+    
+    import java.util.*;
+
+### 3.7 Random numbers
+
+#### Generating a random number
+
+The **Random** class provides methods that return a random integer in the range -2^31 to 2^31 - 1 or a programmer-defined range
+
+    import java.util.Random;
+
+    public class ThreeRandomValues {
+      public static void main(String[] args) {
+          Random randGen = new Random();  // New random number generator
+
+          System.out.println(randGen.nextInt());  // 959650663
+          System.out.println(randGen.nextInt());  // 324135575
+          System.out.println(randGen.nextInt());  // 1735989143
+      }
+    }
+
+The statement **import java.util.Random;** enables use of the Random class
+
+  - The statement *Random randGen = new Random();* creates a new random number generator object named randGen

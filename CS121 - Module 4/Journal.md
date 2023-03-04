@@ -43,6 +43,120 @@ A ***Boolean*** is a type that has just two values: true or false
 
 An ***if-else statement*** executes one group of statements when an expression is true, and another group of statements when the expression is false
 
+### 4.4 Detecting ranges with branches
+
+#### Relational operators
+
+A ***rational operator*** checks how one operand's value relates to another, like being greater than
+
+#### Detecting Ranges with if-else statements 
+Programmers often use sequential nature of the multi-branch if-else arrangemen to detect ranges of numbers
+
+### 4.5 Detecting ranges using logical operators
+
+#### Logical AND, OR, and NOT (general)
+
+A ***logical operator*** treats operands as being true or false, and evaluates to true or false
+  - Logical operators include AND, OR, and NOT
+
+        false && false = false
+        false && true = false
+        true && false = false
+        true && true = true
+
+        false || false = false
+        false || true = true
+        true || false = true
+        true || true = true
+
+        a = false a! = true
+        a = true a! = false
+
+a **AND** b is *true* when both of its operands are true
+a **OR** b is *true* when at least one of its operands are true
+**NOT** a is *true* when its one operand is false, and vice-versa
+
+### 4.6 Detecting ranges with gaps
+
+Oftentimes, ranges contain gaps like movie theaters often give ticket discounts to children(anyone 12 or under) and seniors(65 and older)
+
+    import java.util.Scanner;
+
+    public class MovieTicketPrices {
+    public static void main(String[] args) {
+        int userAge;
+        int movieTicketPrice;     
+        Scanner scnr = new Scanner(System.in);
+
+        System.out.println("Enter your age: ");
+        userAge = scnr.nextInt();
+
+        if (userAge <= 12) {         // Age 12 and under
+            System.out.println("Child ticket discount.");
+            movieTicketPrice = 11;
+        }
+        else if (userAge >= 65) {    // Age 65 and older
+            System.out.println("Senior ticket discount.");
+            movieTicketPrice = 12;
+        }
+        else {                       // All other ages
+            movieTicketPrice = 14;
+        }
+
+        System.out.println("Movie ticket price: $" +
+            movieTicketPrice);
+      }
+    }
+
+#### Ranges with gaps using logical operators
+
+Programmers often use logical operators to explicitly detect ranges with an upper and lower bound
+
+    if (officeNum >= 100 && officeNum <= 150)
+    {
+        // valid office number
+    }
+    else if (officeNum >= 200 && officeNum <= 250)
+    {
+        // valid office number
+    }
+    else
+    {
+        // invalid office number
+    }
+
+### 4.7 Detecting multiple features with branches
+
+#### Multiple distinct if statements
+
+A programmer can use multiple if statements in sequence to detect multiple features with independent actions
+
+Multiple sequential if statements look similar to a multi-branch statement but has a very different meaning
+
+  -Each if statement is independent, and thus more than one branch can execute
+
+    if (userAge < 16) {
+        System.out.println("Enjoy your early years.");
+    }
+
+    if (userAge > 15) {
+        System.out.println("You are old enough to drive.");
+    }
+
+    if (userAge > 17) {
+        System.out.println("You are old enough to vote.");
+    }
+
+    if (userAge > 24) {
+        System.out.println("Most car rental companies will rent to you");
+    }
+
+
+
+### 4.11 Switch Statements
+
+
+
 # Guided Experiment
 
 ## Boolean Expression Experimentation

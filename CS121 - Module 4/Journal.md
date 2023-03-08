@@ -154,8 +154,91 @@ Multiple sequential if statements look similar to a multi-branch statement but h
 
 
 ### 4.11 Switch Statements
+A ***switch statement*** can more clearly represent multi-branch behavior involving a variable being compared to constant values
 
+The program executes the first ***case*** whose constant expression matches the value of the switch expression, executes the case's statement, and then jumps to the end, then the ***default case*** statements are executed
 
+    switch (a) {
+        case 0:
+            // Print "zero"
+            break;
+
+        case 1:
+            // Print "one"
+            break;
+
+        case 2:
+            // Print "two"
+            break;
+
+        default:
+            // Print "unknown"
+            break;
+        }
+
+#### Switch statement general form
+
+The switch statement's expression should be an integer, char, or string. The expression should not be a Boolean or a floating-point type. Each case must have a constant expression like 2 or 'q'; a case expression canoot be a expession
+  - Order does not matter (though it is bad style)
+  - !! Good practice - ALWAYS HAVE DEFAULT CASE FOR SWITCH
+
+#### Omitting the break statement
+
+Omitting the ***break*** statement for a case will cause the statements within the next case to be executed
+
+    if (dogAgeYears == 0) {
+        System.out.print("Enter dog's age in months: ");
+        dogAgeMonths = scnr.nextInt();
+
+        switch (dogAgeMonths) {
+        case 0:
+        case 1:
+        case 2:
+            System.out.println("That's 0..14 human months.");
+            break;
+
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+            System.out.println("That's 14 months to 5 human years.");
+            break;
+
+        case 7:
+        case 8:
+            System.out.println("That's 5..9 human years.");
+            break;
+
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+            System.out.println("That's 9..15 human years.");
+            break;
+
+        default:
+            System.out.println("Invalid input.");
+            break;
+        }
+    }
+    else {
+        System.out.println("FIXME: Do earlier dog years cases");
+        switch (dogAgeYears) {
+        }
+    }
+
+### 4.14 String access operations 
+
+#### Working with the end of a string
+
+The method ***length()*** returns the length of a string
+  - If s1 is "Hey", s1.length() returns 3
+
+A common task is to append(add to the end) a string to an existing string
+  - The ***+*** operator can return a new string tat appends a string to another string
+  - Similarly, s1.***concat***(s2) returns a new string that appends s2 to s1.
+    - If s1 is "Hey", then 1.concat("!!!") returns "Hey!!!"
+ 
 
 # Guided Experiment
 

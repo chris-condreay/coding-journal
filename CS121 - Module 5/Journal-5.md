@@ -114,3 +114,8 @@ A method definition with no parameters must still have the parentheses
           System.out.println("16.0 x 0.8 inch pizza is "  + calcPizzaVolume(16.0, 0.8) + " inches cubed");
       }
     }
+
+#### Parameters 
+A programmer can influence a method's behavior via an input
+  - A ***parameter*** is a method input specified in a method definition
+  - An ***argument*** is a value provided to a method's parameter during a method call

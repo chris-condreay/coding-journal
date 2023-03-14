@@ -502,7 +502,6 @@ Testbench: StatsInfoTest.java
     }
 
 ```console
-foo@bar:~$
 Beginning test.
   FAILED set/get num2
   FAILED GetAverage for 10, 20
@@ -510,3 +509,15 @@ Beginning test.
 Tests complete
 ```
 
+#### Regression testing
+
+***Regression testing*** means to retest an item like a class anytime that item is changed; if previously-passed test cases fail, the item has "regressed"
+
+  - A testbranch should be maintained along with the item, to always be usable for regression testing
+
+#### Erroneous unit tests
+
+An erroneous unit test may fail even if the code being tested is correct
+*A common error is for a programmer to assume that a failing unit test means that the code being tested has a bug*
+  - such an assumption would lead to the programmer trying to "fix" code that is already correct
+*Good practice is to inspect the code of a failing unit test before making changes to the code being tested*

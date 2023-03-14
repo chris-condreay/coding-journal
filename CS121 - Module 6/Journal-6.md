@@ -521,3 +521,43 @@ An erroneous unit test may fail even if the code being tested is correct
 *A common error is for a programmer to assume that a failing unit test means that the code being tested has a bug*
   - such an assumption would lead to the programmer trying to "fix" code that is already correct
 *Good practice is to inspect the code of a failing unit test before making changes to the code being tested*
+
+### 6.7 Constructor overload
+
+#### Basics
+
+Programmers often want to provide different initialization values when creating a new object
+
+A class creator can ***overload*** a constructor by defining multiple constructors different in parameter types
+  - When an object is created with the new operator. arguments can be passed to the constructor
+  - The constructor with matching parameters will be called
+
+#### If any constructor defined, should define default
+
+*If a programmer defines any constructor, the compiler does not implicitly define a default constrcutor, so good practice is for the programmer to also explicitly define a default constructor* so that an object creation like **new MyClass()** remains supported 
+
+Error - The programmer defined a constructor, so the compiler does not automatically define a default constructor
+
+    public class Restaurant {
+      public Restaurant(String initName, int initRating) {
+          ... 
+      }
+
+      // No other constructors
+    }
+
+    public class RestaurantFavorites {
+      public static void main(String[] args) {
+          Restaurant foodPlace = new Restaurant();              
+          ...
+      }
+    }
+
+```console
+RestaurantFavorites.java:3: cannot find symbol
+symbol  : constructor Restaurant()
+location: class Restaurant
+      Restaurant foodPlace = new Restaurant();
+                             ^
+```
+

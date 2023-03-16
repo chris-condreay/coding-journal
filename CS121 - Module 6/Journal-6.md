@@ -646,3 +646,133 @@ The ***JavaDoc*** tool parses source code along with specifically formatted comm
 The specifically formatted comments for JavaDoc are called ***Doc comments***, which are multi-line comments consisting of all text enclosed between the /* and */ characters.
   - Doc comments are distinguished by the opening character /**, which inlcude two asterisks
 
+*ElapsedTime.java*
+
+    /**
+    * A class representing an elapsed time measurement 
+    * in hours and minutes. 
+    * @author Mary Adams
+    * @version 1.0
+    */
+    public class ElapsedTime {
+      /**
+        * The hours portion of the time
+        */
+      private int hours;
+      
+      /**
+        * The minutes portion of the time
+        */
+      private int minutes;
+
+      /**
+        * Constructor initializing hours to timeHours and 
+        * minutes to timeMins. 
+        * @param timeHours hours portion of time
+        * @param timeMins minutes portion of time
+        */   
+      public ElapsedTime(int timeHours, int timeMins) {
+          hours   = timeHours;
+          minutes = timeMins;
+      }
+      
+      /**
+        * Default constructor initializing all fields to 0. 
+        */   
+      public ElapsedTime() {
+          hours = 0;
+          minutes = 0;
+      }
+      
+      /**
+        * Prints the time represented by an ElapsedTime 
+        * object in hours and minutes.
+        */
+      public void printTime() {
+          System.out.print(hours + " hour(s) " + minutes + " minute(s)");
+      }
+      
+      /**
+        * Sets the time to timeHours:timeMins.
+        * @param timeHours hours portion of time
+        * @param timeMins minutes portion of time
+      */
+      public void setTime(int timeHours, int timeMins) {
+          hours = timeHours;
+          minutes = timeMins;
+      }
+
+      /**
+        * Returns the total time in minutes.
+        * @return an int value representing the elapsed time in minutes.
+        */
+      public int getTimeMinutes() {
+          return ((hours * 60) + minutes);
+      }
+    }
+
+*TimeDifference.java*
+
+    import java.util.Scanner;
+
+    /**
+    * This program calculates the difference between two 
+    * user-entered times. This class contains the 
+    * program's main() method and is not meant to be instantiated.
+    * @author Mary Adams
+    * @version 1.0
+    */
+    public class TimeDifference {
+      /**
+        * Asks for two times, creating an ElapsedTime object for each, 
+        * and uses ElapsedTime's getTimeMinutes() method to properly 
+        * calculate the difference between both times.
+        * @param args command-line arguments
+        * @see ElapsedTime#getTimeMinutes()
+        */
+      public static void main(String[] args) {
+          Scanner scnr = new Scanner(System.in);
+          int timeDiff;     // Stores time difference
+          int userHours;
+          int userMins;
+          ElapsedTime startTime = new ElapsedTime(); // Starting time
+          ElapsedTime endTime = new ElapsedTime(); // Ending time
+
+          // Read starting time in hours and minutes
+          System.out.print("Enter starting time (hrs mins): ");
+          userHours = scnr.nextInt();
+          userMins = scnr.nextInt();
+          startTime.setTime(userHours, userMins);
+                  
+          // Read ending time in hours and minutes
+          System.out.print("Enter ending time (hrs mins): ");
+          userHours = scnr.nextInt();
+          userMins = scnr.nextInt();
+          endTime.setTime(userHours, userMins);
+
+          // Calculate time difference by converting both times to minutes
+          timeDiff = endTime.getTimeMinutes() - startTime.getTimeMinutes(); 
+          
+          System.out.println("Time difference is " + timeDiff + " minutes");
+      }
+    }
+
+A Doc comment associated with a class is written immediately before the class definition
+  - Usually describes the main purpose
+
+The tag section of the Doc comment may include block tags such as ***@author*** and ***@version*** to specify the class' author and version number respectively.
+
+Each class also contains Doc comments describing member methods
+Programmers can use the ***@param*** and ***@return*** block tags to specify a method parameter and method return value respectively
+
+Generic block tags, such as ***@see*** and others described by the Javadoc specification, may be used to provide more information
+  -Ex: the main() method's Doc comment use the @see block tag to refer to ElapsedTime's getTimeMinutes() method, as in **@see ElapsedTime#getTimeMinutes()**
+
+#### Methods with wrapper class parameters
+
+Instances of wrapper classes, such as Integer and Double, and the String class are defined as ***immutable***, meaning that a programmer cannot modify the object's contents after initialization; new objects must be created instead
+  - The statement **Integer travelTime = 10;** initializes the variable travelTime with a reference to a new Integer object
+  - Assigning the variable travelTime later with another value, such as **travelTime = 11;**, creates a completely new object and assigns travelTime to refer to the new object's reference
+
+#### Methods with user-declared reference variables as parameters
+

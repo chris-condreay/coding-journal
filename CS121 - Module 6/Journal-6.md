@@ -768,6 +768,19 @@ Programmers can use the ***@param*** and ***@return*** block tags to specify a m
 Generic block tags, such as ***@see*** and others described by the Javadoc specification, may be used to provide more information
   -Ex: the main() method's Doc comment use the @see block tag to refer to ElapsedTime's getTimeMinutes() method, as in **@see ElapsedTime#getTimeMinutes()**
 
+### 6.10 Parameters of reference types
+
+#### Methods with reference variables as parameters
+
+A ***reference variable*** is a variable that points to, or refers to, an object or array
+
+  - Internally, a reference variable stores a reference, or the memory location, of the object to which it refers
+
+  - A programmer can only access the data or functionality provided by objects through the use of reference variables
+
+Beecause reference variables store object locations and not the object data itself, passing a reference variable as a method argument assigns the argument's stored reference to the corresponding method parameter
+  - Returning a reference variable returns an object reference 
+
 #### Methods with wrapper class parameters
 
 Instances of wrapper classes, such as Integer and Double, and the String class are defined as ***immutable***, meaning that a programmer cannot modify the object's contents after initialization; new objects must be created instead
@@ -775,4 +788,13 @@ Instances of wrapper classes, such as Integer and Double, and the String class a
   - Assigning the variable travelTime later with another value, such as **travelTime = 11;**, creates a completely new object and assigns travelTime to refer to the new object's reference
 
 #### Methods with user-declared reference variables as parameters
+
+A programmer-defined object is passed to a method by passing a reference(i.e. memory location) to the object.
+  - The reference to the object is copied to the method's parameter, so the method can modify the object
+
+Ex:
+  - the DeviceOrientation class to represent the smartphone's orientation in terms of pitch and roll of a device such as a smartphone
+  - This information is typically used to track a device for purposes such as changing screen orientation
+  - The updateOrientation method modifies a DeviceOrientation object by calling the object's member methods that modify the object
+
 

@@ -797,4 +797,323 @@ Ex:
   - This information is typically used to track a device for purposes such as changing screen orientation
   - The updateOrientation method modifies a DeviceOrientation object by calling the object's member methods that modify the object
 
+        public class SmartPhoneTracking {
+          public static void updateOrientation(DeviceOrientation device,double samplingPeriod, double gyroX, double gyroY) {
+          
+              double pitchAngle = device.getPitch() + (gyroX * samplingPeriod);
+              double rollAngle = device.getRoll() + (gyroY * samplingPeriod);
+          
+              device.setPitch(pitchAngle);
+              device.setRoll(rollAngle);
+          }
 
+          public static void main(String[] args) {
+              DeviceOrientation phoneOrientation = new DeviceOrientation();
+
+              phoneOrientation.setPitch(45.0);
+              phoneOrientation.setRoll(0.0);
+          
+              updateOrientation(phoneOrientation, 0.01, 100.0, 10.0);
+              System.out.println("iPhone's pitch: " + phoneOrientation.getPitch());
+              System.out.println("iPhone's roll: " + phoneOrientation.getRoll());
+          }
+        }
+
+A parameter of reference type allows object modification only through the object's public methods or fields
+
+Assigning a different value to a parameter variable of reference type, as in **device = new DeviceOrientation();** assigns a new object to the reference variable, but does not modify the original object to which the variable first referred
+
+### 6.11 Static fields and methods
+
+#### Static fields
+
+The keyword ***static*** indicates a variable is allocated in memory only once during a program's execution
+
+Static variables reside in teh program's static memory region and have a global scope
+  - static variables can be accessed from anywhere in the program
+
+In a class, a ***static field*** is a field of the class instead of a field of each class object
+
+Static fields are independent of any class object, and can be accessed without creating a class object
+  - Static fields are declared and initialized in the class definition
+
+Within a class method, a static field is accessed using the field name
+
+##### Instance and class variable
+*Static field are called **class variables**, and non-static fields are also called **instance variables***
+
+#### Static member methods
+
+A ***static member method*** is a class method that is independent of class objects. They are often used to access and mutate private static fields from outside the class
+  - Since static methods are independent of class object, the **this** parameter is not passed to a static method method
+
+### 6.14 Classes and ArrayLists
+
+#### ArrayList of objects: A reviews program
+
+A programmer commonly uses classes and ArrayList together.
+
+*Review.java*
+
+    public class Review {
+      private int rating = -1;
+      private String comment = "NoComment";
+      
+      public void setRatingAndComment(int revRating, String revComment) {
+          rating = revRating;
+          comment = revComment;
+      }
+      public int getRating() { return rating; }
+      public String getComment() { return comment; }
+    }
+
+*ReviewSystem.java*
+
+    import java.util.ArrayList;
+    import java.util.Scanner;
+
+    public class ReviewSystem {
+    
+      public static void main(String [] args) {
+          Scanner scnr = new Scanner(System.in);
+          ArrayList<Review> reviewList = new ArrayList<Review>();
+          Review currReview;
+          int currRating;
+          String currComment;
+          int i;
+      
+          System.out.println("Type rating + comments. To end: -1");
+          currRating = scnr.nextInt();
+          while (currRating >= 0) {
+            currReview = new Review();
+            currComment = scnr.nextLine(); // Gets rest of line
+            currReview.setRatingAndComment(currRating, currComment);
+            reviewList.add(currReview);
+            currRating = scnr.nextInt();
+          }
+      
+          // Output all comments for given rating
+          System.out.println();
+          System.out.println("Type rating. To end: -1");
+          currRating = scnr.nextInt();
+          while (currRating != -1) {
+            for (i = 0; i < reviewList.size(); ++i) {
+                currReview = reviewList.get(i);
+                if (currRating == currReview.getRating()) {
+                  System.out.println(currReview.getComment());
+                }
+            }
+            currRating = scnr.nextInt();
+          }
+      }
+    }
+
+#### A class with an ArrayList: The Reviews class
+
+A class can involve ArrayLists. 
+  - The program below redoes the example above, creating a Reviews class for managing an ArrayList of Review objects
+  - The Reviews class has methods for reading reviews and printing comments. The resulting main() is clearer than above
+  - The Reviews class has a getter method that returns the average rating
+  - The method computes the average rather than reading a private field, but the class user need not know how the method is implemented
+
+*Review.java*
+
+    public class Review {
+      private int rating = -1;
+      private String comment = "NoComment";
+      
+      public void setRatingAndComment(int revRating, String revComment) {
+          rating = revRating;
+          comment = revComment;
+      }
+      public int getRating() { return rating; }
+      public String getComment() { return comment; }
+    }
+
+===============================================================
+*Reviews.java*
+
+    import java.util.ArrayList;
+    import java.util.Scanner;
+
+    public class Reviews {
+      private ArrayList<Review> reviewList = new ArrayList<Review>();
+      
+      public void inputReviews(Scanner scnr) {
+          Review currReview;
+          int currRating;
+          String currComment;
+      
+          currRating = scnr.nextInt();
+          while (currRating >= 0) {
+            currReview = new Review();
+            currComment = scnr.nextLine(); // Gets rest of line
+            currReview.setRatingAndComment(currRating, currComment);
+            reviewList.add(currReview);
+            currRating = scnr.nextInt();
+          }
+      }
+      
+      public void printCommentsForRating(int currRating) {
+          Review currReview;
+          int i;
+      
+          for (i = 0; i < reviewList.size(); ++i) {
+            currReview = reviewList.get(i);
+            if (currRating == currReview.getRating()) {
+                System.out.println(currReview.getComment());
+            }
+          }
+      }
+      
+      public int getAverageRating() {
+          int ratingsSum;
+          int i;
+      
+          ratingsSum = 0;
+          for (i = 0; i < reviewList.size(); ++i) {
+            ratingsSum += reviewList.get(i).getRating();
+          }
+          return (ratingsSum / reviewList.size());
+      }
+    }
+===============================================================
+ReviewSystem.java
+
+    import java.util.ArrayList;
+    import java.util.Scanner;
+
+    public class ReviewSystem {
+    
+      public static void main(String [] args) {
+          Scanner scnr = new Scanner(System.in);
+          Reviews allReviews = new Reviews();
+          String currName;
+          int currRating;
+      
+          System.out.println("Type rating + comments. To end: -1");
+          allReviews.inputReviews(scnr);
+      
+          System.out.println("\nAverage rating: ");
+          System.out.println(allReviews.getAverageRating());
+      
+          // Output all comments for given rating
+          System.out.println("\nType rating. To end: -1");
+          currRating = scnr.nextInt();
+          while (currRating != -1) {
+            allReviews.printCommentsForRating(currRating);
+            currRating = scnr.nextInt();
+          }
+      }
+}
+
+```console
+
+Type rating + comments. To end: -1
+5 Great place!
+5 Loved the food.
+2 Pretty bad service.
+4 New owners are nice.
+2 Yuk!!!
+4 What a gem.     
+-1
+
+Average rating: 
+3
+================================
+Type rating. To end: -1
+5
+ Great place!
+ Loved the food.
+1
+4
+ New owners are nice.
+ What a gem.     
+-1
+```
+
+#### Using Reviews in the Restaurant class
+
+Programmers commonly use classes within classes
+  - The program below uses a Restaurant class that contains a Reviews class so reviews can be associated with a specific restaurant
+
+*Restaurant.java*
+
+    import java.util.Scanner;
+
+    // Review and Reviews classes omitted from the figure 
+
+    public class Restaurant {
+      private String name;
+      private Reviews reviews = new Reviews();
+      
+      public void setName(String restaurantName) {
+          name = restaurantName;
+      }
+          
+      public void readAllReviews(Scanner scnr) {
+          System.out.println("Type ratings + comments. To end: -1");
+          reviews.inputReviews(scnr);
+      }
+      
+      public void printCommentsByRating() { 
+          int i;
+          
+          System.out.println("Comments for each rating level: ");
+          for (i = 1; i <= 5; ++i) {
+            System.out.println(i + ":");
+            reviews.printCommentsForRating(i);
+          }
+      }
+    }
+
+*RestaurantReviews.java*
+
+    import java.util.ArrayList;
+    import java.util.Scanner;
+
+    public class RestaurantReviews {
+    
+      public static void main (String [] args) {
+          Scanner scnr = new Scanner(System.in);
+          Restaurant ourPlace = new Restaurant();
+          String currName;
+      
+          System.out.println("Type restaurant name: ");
+          currName = scnr.nextLine();
+          ourPlace.setName(currName);
+          System.out.println();
+      
+          ourPlace.readAllReviews(scnr);
+          System.out.println();
+      
+          ourPlace.printCommentsByRating();
+      }
+    }
+
+```console
+Type restaurant name: 
+Maria's Healthy Food
+
+Type ratings + comments. To end: -1
+5 Great place!
+5 Loved the food.
+2 Pretty bad service.
+4 New owners are nice.
+2 Yuk!!!
+4 What a gem.     
+-1
+
+Comments for each rating level: 
+1:
+2:
+ Pretty bad service.
+ Yuk!!!
+3:
+4:
+ New owners are nice.
+ What a gem.     
+5:
+ Great place!
+ Loved the food.
+```
